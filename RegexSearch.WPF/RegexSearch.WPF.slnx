@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../RegexSearch.Core/RegexSearch.Core.csproj" />
+  <Project Path="RegexSearch.WPF.csproj" />
+</Solution>

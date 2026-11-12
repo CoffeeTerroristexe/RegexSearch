@@ -1,0 +1,51 @@
+﻿<Window x:Class="RegexSearch.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Поиск USER_ID (Вариант 1)" Height="550" Width="850" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="15">
+        <!-- Разбиваем окно на 4 строки -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- 0: Кнопки -->
+            <RowDefinition Height="Auto"/>
+            <!-- 1: Поле ввода -->
+            <RowDefinition Height="*"/>
+            <!-- 2: Таблица -->
+            <RowDefinition Height="Auto"/>
+            <!-- 3: Статус -->
+        </Grid.RowDefinitions>
+
+        <!-- Строка 0: Панель с кнопками -->
+        <WrapPanel Grid.Row="0" Margin="0,0,0,10">
+            <Button Content="Поиск через Regex" Click="RegexButton_Click" Width="160" Margin="0,0,10,10" Padding="5" Background="#2878C8" Foreground="White"/>
+            <Button Content="Поиск через автомат" Click="AutomatonButton_Click" Width="160" Margin="0,0,10,10" Padding="5" Background="#21875A" Foreground="White"/>
+            <Button Content="Сравнить алгоритмы" Click="CompareButton_Click" Width="160" Margin="0,0,10,10" Padding="5" Background="#6B62B5" Foreground="White"/>
+            <Button Content="Очистить" Click="ClearButton_Click" Width="100" Margin="0,0,10,10" Padding="5" Background="#E5E9EF"/>
+        </WrapPanel>
+
+        <!-- Строка 1: Поле для ввода текста -->
+        <GroupBox Grid.Row="1" Header="Исходный текст" Margin="0,0,0,10">
+            <TextBox x:Name="InputText" Height="120" AcceptsReturn="True" TextWrapping="Wrap" 
+                     VerticalScrollBarVisibility="Auto" FontFamily="Consolas" Padding="5"
+                     Text="Корректные: USER_12345, USER_12345678, USER_0000000, USER_987654, USER_10020030.&#10;&#10;Некорректные: USER_1234, USER_123456789, user_12345, USER-12345, USER_12A45."/>
+        </GroupBox>
+
+        <!-- Строка 2: Таблица результатов -->
+        <GroupBox Grid.Row="2" Header="Результаты поиска">
+            <DataGrid x:Name="ResultsGrid" AutoGenerateColumns="False" IsReadOnly="True" 
+                      CanUserAddRows="False" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}" Width="50"/>
+                    <DataGridTextColumn Header="Найденная подстрока" Binding="{Binding Value}" Width="*"/>
+                    <DataGridTextColumn Header="Позиция" Binding="{Binding Position}" Width="100"/>
+                    <DataGridTextColumn Header="Длина" Binding="{Binding Length}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <!-- Строка 3: Строка статуса -->
+        <TextBlock x:Name="StatusText" Grid.Row="3" Text="Программа готова к работе." 
+                   Margin="0,10,0,0" FontWeight="Bold" Foreground="Gray"/>
+    </Grid>
+</Window>
